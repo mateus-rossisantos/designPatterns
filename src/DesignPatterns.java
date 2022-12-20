@@ -10,6 +10,7 @@ import designpatterns.builder.PessoaBuilder;
 import designpatterns.chainofresponsibility.*;
 import designpatterns.composite.CPU;
 import designpatterns.composite.Cache;
+import designpatterns.interpreter.*;
 import designpatterns.prototype.*;
 
 import java.math.BigDecimal;
@@ -113,6 +114,22 @@ public class DesignPatterns {
 
     public void interpreter() {
         System.out.println("O padrão de projeto Interpreter é um padrão de projeto comportamental que permite definir uma gramática para uma linguagem e interpretar sentenças nessa linguagem. Ele é útil quando precisamos interpretar uma linguagem específica, como uma linguagem de script ou uma linguagem de consulta.");
+
+        Operador somar = new Somar(new Numero(1), new Numero(4));
+
+        System.out.println(somar.interpretar());
+
+        Operador subtrair = new Subtrair(somar, new Numero(2));
+
+        System.out.println(subtrair.interpretar());
+
+        Operador multiplicar = new Multiplicar(subtrair, somar);
+
+        System.out.println(multiplicar.interpretar());
+
+        Operador dividir = new Dividir(new Numero(30), multiplicar);
+
+        System.out.println(dividir.interpretar());
     }
 
     public void abstractFactory() {
