@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("DEMONSTRAÇÃO DESIGN PATTERNS");
 
         menu();
     }
 
-    private static void menu() {
+    private static void menu() throws InterruptedException {
         DesignPatterns designPatterns = new DesignPatterns();
         Scanner scan = new Scanner(System.in);
         boolean off = false;

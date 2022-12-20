@@ -1,3 +1,10 @@
+import designpatterns.adapter.adapter.MongoAdapter;
+import designpatterns.adapter.repository.impl.OracleDBImpl;
+import designpatterns.adapter.repository.interfaces.DBInterface;
+import designpatterns.bridge.ControleRemotoImpl;
+import designpatterns.bridge.Dispositivo;
+import designpatterns.bridge.Radio;
+import designpatterns.bridge.TV;
 import designpatterns.builder.Pessoa;
 import designpatterns.builder.PessoaBuilder;
 import designpatterns.chainofresponsibility.*;
@@ -78,10 +85,30 @@ public class DesignPatterns {
 
     public void bridge() {
         System.out.println("O padrão de projeto Bridge é um padrão de projeto estrutural que visa desacoplar uma abstração de sua implementação, de forma que ambas possam ser alteradas independentemente. Isso é conseguido criando uma interface comum para a abstração e uma classe de implementação para cada implementação possível. A abstração então possui uma referência para a classe de implementação e delega a ela as chamadas de método.");
+        testarDispositivo(new TV());
+        testarDispositivo(new Radio());
     }
 
-    public void adapter() {
+    public void adapter() throws InterruptedException {
         System.out.println("O padrão de projeto Adapter é um padrão de projeto estrutural que visa adaptar uma interface de uma classe para outra interface esperada pelos clientes. Isso é útil quando temos uma classe existente que precisa ser usada, mas sua interface não é compatível com o que o cliente espera. O Adapter permite que a classe existente seja usada sem alterá-la.");
+        DBInterface bancoDeDados = new OracleDBImpl();
+
+        String usuario = "Usuário";
+
+        System.out.println("EXEMPLO ADAPTER");
+        System.out.println("----------------");
+
+        bancoDeDados.insert(usuario);
+        bancoDeDados.select(usuario);
+        bancoDeDados.update(usuario);
+        bancoDeDados.delete(usuario);
+
+        bancoDeDados = new MongoAdapter();
+
+        bancoDeDados.insert(usuario);
+        bancoDeDados.select(usuario);
+        bancoDeDados.update(usuario);
+        bancoDeDados.delete(usuario);
     }
 
     public void interpreter() {
@@ -102,5 +129,14 @@ public class DesignPatterns {
 
     public void proxy() {
         System.out.println("O padrão de projeto Proxy é um padrão de projeto de software que permite fornecer uma interface de acesso a um objeto, chamado \"subject\", de maneira a controlar o acesso a esse objeto. Ele é útil quando você quer adicionar algum tipo de lógica de controle de acesso a um objeto ou quando você quer adicionar funcionalidades adicionais ao objeto sem alterar sua classe.");
+    }
+
+    private void testarDispositivo(Dispositivo dispositivo) {
+        System.out.println("Teste controle remoto");
+        ControleRemotoImpl controleRemoto = new ControleRemotoImpl(dispositivo);
+        controleRemoto.power();
+        controleRemoto.channelUp();
+        controleRemoto.volumeDown();
+        dispositivo.printStatus();
     }
 }
