@@ -16,6 +16,7 @@ import designpatterns.composite.CPU;
 import designpatterns.composite.Cache;
 import designpatterns.interpreter.*;
 import designpatterns.prototype.*;
+import designpatterns.state.MaquinaDeRefri;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -153,6 +154,31 @@ public class DesignPatterns {
 
     public void state() {
         System.out.println("O padrão de projeto State é um padrão de projeto de software que permite que um objeto altere seu comportamento quando o seu estado interno muda. Ele é útil quando um objeto precisa alterar sua lógica de execução de acordo com o seu estado atual.");
+        //state começa como sem refri
+        MaquinaDeRefri maquinaDeRefri = new MaquinaDeRefri(2);
+        //como foi passado 2 refris o state passa para semMoeda
+
+        System.out.println(maquinaDeRefri);
+
+        //quando insere a moeda ele muda o state para com Moeda
+        maquinaDeRefri.inserirMoeda();
+        //quando escolhe ele muda para o estado de venda
+        //entrega usando o estado de venda e diminui o estoque,
+        //se o estoque fica vazio ele muda para o estado sem refri se não vai para sem moeda
+        maquinaDeRefri.escolherRefri();
+
+
+        System.out.println(maquinaDeRefri);
+
+        maquinaDeRefri.inserirMoeda();
+        maquinaDeRefri.escolherRefri();
+
+        System.out.println(maquinaDeRefri);
+
+        maquinaDeRefri.inserirMoeda();
+        maquinaDeRefri.escolherRefri();
+
+        System.out.println(maquinaDeRefri);
     }
 
     public void visitor() {
