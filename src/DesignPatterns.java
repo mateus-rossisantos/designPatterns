@@ -1,3 +1,7 @@
+import designpatterns.abstractFactory.AndroidFactory;
+import designpatterns.abstractFactory.App;
+import designpatterns.abstractFactory.IosFactory;
+import designpatterns.abstractFactory.TelaFactory;
 import designpatterns.adapter.adapter.MongoAdapter;
 import designpatterns.adapter.repository.impl.OracleDBImpl;
 import designpatterns.adapter.repository.interfaces.DBInterface;
@@ -134,6 +138,17 @@ public class DesignPatterns {
 
     public void abstractFactory() {
         System.out.println("O padrão Abstract Factory é um padrão de projeto de software que permite a criação de famílias de objetos relacionados ou dependentes sem especificar suas classes concretas. Em outras palavras, o padrão Abstract Factory fornece uma interface para criar conjuntos de objetos relacionados ou dependentes sem especificar suas classes concretas.");
+        App app;
+        TelaFactory telaFactory;
+        String sistema = "Android";
+
+        if (sistema.equals("Android")){  //você pode fazer este teste dar false para testar o IosFactory
+            telaFactory = new AndroidFactory();
+        } else {
+            telaFactory = new IosFactory();
+        }
+        app = new App(telaFactory);
+        app.clicar();
     }
 
     public void state() {

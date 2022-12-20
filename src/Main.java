@@ -14,6 +14,7 @@ public class Main {
         boolean off = false;
 
         while (!off){
+            System.out.println(" ");
             System.out.println("Escolha o padrão de projeto que desejar.");
             opcoes();
             String opcao = scan.nextLine();
