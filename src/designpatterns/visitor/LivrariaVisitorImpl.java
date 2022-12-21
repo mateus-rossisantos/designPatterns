@@ -11,7 +11,7 @@ public class LivrariaVisitorImpl implements LivrariaVisitor {
         } else {
             custo = livro.getPreco();
         }
-        System.out.println("Livro: "+ livro.getNome() + " custando R$ " + livro.getPreco());
+        System.out.println("Livro: "+ livro.getNome() + " custando R$ " + custo);
         return custo;
     }
 
