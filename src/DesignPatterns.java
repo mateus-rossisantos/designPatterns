@@ -17,6 +17,7 @@ import designpatterns.composite.Cache;
 import designpatterns.interpreter.*;
 import designpatterns.prototype.*;
 import designpatterns.state.MaquinaDeRefri;
+import designpatterns.visitor.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,7 +25,10 @@ import java.util.List;
 public class DesignPatterns {
 
     public void composite() {
-        System.out.println("O padrão composite é um padrão de projeto de software que permite que você trate objetos individuais e coleções de objetos de maneira uniforme. Isso é útil quando você quer construir uma estrutura de objetos em árvore e precisa tratar cada nó da árvore de maneira uniforme, independentemente de ser um nó folha ou um nó interno.");
+        System.out.println("O padrão composite é um padrão de projeto de software que permite que você trate" +
+                "\n objetos individuais e coleções de objetos de maneira uniforme. Isso é útil quando você quer" +
+                "\n construir uma estrutura de objetos em árvore e precisa tratar cada nó da árvore de maneira " +
+                "\nuniforme, independentemente de ser um nó folha ou um nó interno.");
         Cache cacheL1 = new Cache(4);
         Cache cacheL2 = new Cache(2);
         CPU processador = new CPU(12);
@@ -183,10 +187,19 @@ public class DesignPatterns {
 
     public void visitor() {
         System.out.println("O padrão de projeto Visitor é um padrão de projeto de software que permite adicionar uma operação a um conjunto de objetos de uma estrutura de dados, sem alterar as classes dos objetos em si. Ele é útil quando você precisa executar uma operação em todos os elementos de uma estrutura de dados, mas não quer adicionar essa operação às classes dos elementos.");
+
+        List<ItemLivraria> itens = List.of(new Revista(100, "Playboy", 18), new Livro(160, "Código Limpo"));
+        int precoTotal = calculo(itens);
+        System.out.println("Preço total: R$ " + precoTotal);
     }
 
     public void proxy() {
-        System.out.println("O padrão de projeto Proxy é um padrão de projeto de software que permite fornecer uma interface de acesso a um objeto, chamado \"subject\", de maneira a controlar o acesso a esse objeto. Ele é útil quando você quer adicionar algum tipo de lógica de controle de acesso a um objeto ou quando você quer adicionar funcionalidades adicionais ao objeto sem alterar sua classe.");
+        System.out.println("O padrão de projeto Proxy é um padrão de projeto de software que permite " +
+                "\nfornecer uma interface de acesso a um objeto, chamado \"subject\", de maneira a " +
+                "\ncontrolar o acesso a esse objeto. Ele é útil quando você quer adicionar algum tipo " +
+                "\nde lógica de controle de acesso a um objeto ou quando você quer adicionar funcionalidades " +
+                "\nadicionais ao objeto sem alterar sua classe.");
+
     }
 
     private void testarDispositivo(Dispositivo dispositivo) {
@@ -196,5 +209,14 @@ public class DesignPatterns {
         controleRemoto.channelUp();
         controleRemoto.volumeDown();
         dispositivo.printStatus();
+    }
+
+    private int calculo(List<ItemLivraria> items) {
+        LivrariaVisitor visitor = new LivrariaVisitorImpl();
+        int sum=0;
+        for(ItemLivraria item : items){
+            sum = sum + item.checagemPreCompra(visitor);
+        }
+        return sum;
     }
 }
